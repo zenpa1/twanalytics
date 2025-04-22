@@ -1,0 +1,15 @@
+service: twanalytics
+
+provider:
+  name: aws
+  runtime: nodejs22.9.0
+  environment:
+    TWITCH_BOT_USERNAME: ${file(./config.js):TWITCH_BOT_USERNAME}
+    TWITCH_OAUTH_TOKEN: ${file(./config.js):TWITCH_OAUTH_TOKEN}
+    TWITCH_CHANNEL: ${file(./config.js):TWITCH_CHANNEL}
+
+functions:
+  bot:
+    handler: bot.handler
+    events:
+      - httpApi: '*'
